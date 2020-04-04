@@ -95,9 +95,7 @@
 
     /* Masonry Grid */
     $(document).on('add.cards', function(event) {
-        var $section = $(event.target),
-            allItem = $section.find('.mbr-gallery-filter-all');
-        var filterList = [];
+        var $section = $(event.target);
         $section.on('click', '.mbr-gallery-filter li > .btn', function(e) {
             e.preventDefault();
             var $li = $(this).closest('li');
@@ -117,7 +115,7 @@
                     return el.trim();
                 });
 
-                if ($.inArray(filter, tagsTrimmed) === -1 && !$li.hasClass('mbr-gallery-filter-all')) {
+                if ($.inArray(filter, tagsTrimmed) === -1 && !$li.hasClass('.mbr-gallery-filter-all')) {
                     $elem.addClass('mbr-gallery-item__hided');
 
                     $elem.css('left', '300px');
@@ -130,8 +128,7 @@
         });
     })
     $(document).on('add.cards changeParameter.cards', function(event) {
-        var $section = $(event.target),
-            allItem = $section.find('.mbr-gallery-filter-all');
+        var $section = $(event.target);
         var filterList = [];
         $section.find('.mbr-gallery-item').each(function(el) {
             var tagsAttr = ($(this).attr('data-tags') || "").trim();
@@ -150,16 +147,19 @@
 
             $section.find('.mbr-gallery-filter ul li:not(li:eq(0))').remove();
 
-            filterList.map(function(el) {
-                filterHtml += '<li><a class="btn btn-md btn-primary-outline" href>' + el + '</a></li>';
+            filterList.map(function(el, index) {
+                const defaultClass = "btn btn-md btn-primary-outline";
+                const aClasses = index===0 ? `${defaultClass} filter-graphic` : defaultClass;
+                const liClass = index === 0 ?  'class="active"' : '';
+                filterHtml += `<li ${liClass} ><a class="${aClasses}" href>` + el + '</a></li>';
             });
-            $section.find('.mbr-gallery-filter ul').append(allItem).append(filterHtml);
+            $section.find('.mbr-gallery-filter ul').append(filterHtml);
 
         } else {
             $section.find('.mbr-gallery-item__hided').removeClass('mbr-gallery-item__hided');
             $section.find('.mbr-gallery-row').trigger('filter');
         }
-
+        $section.find('.mbr-gallery-filter li > .filter-graphic').trigger('click');
         updateMasonry(event);
     });
 
@@ -296,7 +296,7 @@
             var player = players[+ytv.attr('data-video-num')];
             player.playVideo ? player.playVideo() : player.play();
         }
-        
+
     });
 
     $window.on('hide.bs.modal', function(e) {
