@@ -27,8 +27,8 @@
   transition: .2s opacity ease-in-out;
   z-index: 5; }
 
-.mbr-gallery .icon-focus::before {
-  content: '\e96b'; }
+/*.mbr-gallery .icon-focus::before {
+  content: '\e96b'; }*/
 
 .mbr-gallery .icon-video::before {
   content: '\e95c'; }
