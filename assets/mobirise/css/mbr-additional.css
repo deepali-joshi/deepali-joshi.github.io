@@ -1673,7 +1673,13 @@ body {
   content: '50';
 }
 .cid-rqJKwl3UXv .progress4 .progressbar-number:before {
-  content: '100';
+  content: '80';
+}
+.cid-rqJKwl3UXv .progress5 .progressbar-number:before {
+  content: '70';
+}
+.cid-rqJKwl3UXv .progress6 .progressbar-number:before {
+  content: '60';
 }
 .cid-rqJKwl3UXv .progress-primary {
   background: rgba(206, 206, 206, 0.4);
